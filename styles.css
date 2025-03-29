@@ -143,6 +143,171 @@ body {
     cursor: pointer;
     color: #2e2e2e;
 }
+.profile-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.591);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    opacity: 0;
+    transition: all 0.3s;
+}
+.profile-modal.active {
+    opacity: 1;
+    display: flex;
+}
+.profile-form {
+    background-color: white;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.profile-modal.active .profile-form {
+    transform: translateY(0);
+}
+
+.profile-form h2 {
+    color: #2e2e2e;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.profile-form h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #f9ea85;
+    border-radius: 3px;
+}
+.profile-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.95rem;
+}
+.profile-form input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    transition: all 0.3s;
+}
+.menu-dropdown {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+}
+.menu-dropdown.active {
+    opacity: 1;
+    display: block;
+}
+.character-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+.menu-option {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #2e2e2e;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-option:hover {
+    background-color: #ceab2f;
+}
+.character-option {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.character-option:hover {
+    transform: scale(1.1);
+    border-color: #f9ea85
+}
+  
+.character-option.selected {
+    border-color: #f9ea85;
+    box-shadow: 0 0 0 2px rgba(141, 145, 65, 0.3);
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.buttons button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.cancel-menu-btn {
+    background-color: #f0f0f0;
+    color: #2e2e2e;
+}
+
+.cancel-menu-btn:hover {
+    background-color: #e0e0e0;
+}
+.save-btn {
+    background-color: #2e2e2e;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 .welcome {
     display: flex;
     align-items: center;  /* Aligns text and image vertically */
@@ -367,6 +532,7 @@ body {
     justify-content: center;
     background-color: #f9ea85;
     transition: all 0.3s;
+    z-index:1000;
 }
 .add-task-btn.active {
     z-index: 1;
@@ -451,22 +617,7 @@ body {
     border-radius: 50% 50% 0 0;
     background-color: #fff;
 }
-.black-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px);
-    background-color: #00000023;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
-}
-.black-backdrop.active {
-    opacity: 1;
-    visibility: visible;
-}
+
 .buttons button.cancel-btn {
     background-color: #ccc;
     color: #2e2e2e;

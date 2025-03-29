@@ -156,7 +156,6 @@
                                     />
                                 </svg>
                                 </span>
-                                <p>Get an Internship</p>
                             </label>
                             <div class="delete">
                                 <svg
@@ -195,8 +194,31 @@
                 />
             </svg>
             </div>
+            <div class="menu-dropdown">
+                <button class="menu-option" id="toggle-sidebar-btn">Hide Sidebar</button>
+                <button class="menu-option" id="open-profile-btn">Profile Settings</button>
+              </div>
             <!--backdrop-->
-            <div class="black-backdrop"></div>
+            <div class="profile-modal">
+                <div class="profile-form">
+                    <h2>Profile Settings</h2>
+                    <label>Username:</label>
+                    <input type="text" id="new-username" placeholder="Enter new username" />
+                    
+                    <label>Avatar:</label>
+                    <div class="character-options">
+                      <img src="image/Cat1.png" class="character-option" data-avatar="Cat1.png">
+                      <img src="image/Cat2.png" class="character-option" data-avatar="Cat2.png">
+                      <img src="image/Cat3.png" class="character-option" data-avatar="Cat3.png">
+                      <img src="image/Cat4.png" class="character-option" data-avatar="Cat4.png">
+                      <!-- Add more avatars -->
+                    </div>       
+                    <div class="buttons">
+                      <button class="cancel-menu-btn">Cancel</button>
+                      <button class="save-btn">Save</button>
+                    </div>
+                  </div>
+            </div>
             <!-- add task form-->
             <div class="add-task">
                 <div class="add-task-backdrop"></div>

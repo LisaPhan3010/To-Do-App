@@ -1,12 +1,13 @@
 
-
+/**
+ * Implement welcome screen where user can insert their username and choose the character
+ */
 const usernameInput = document.getElementById("username");
-const characterSelect = document.getElementById('char-select');
+const characterSelect = document.getElementById("char-select");
 const startButton = document.getElementById('start-btn');
 const wrapper = document.querySelector(".wrapper");
-const menuBtn = document.querySelector(".menu-btn");
 const backBtn = document.querySelector(".back-btn");
-const previewImg = document.getElementById('preview-img');
+const previewImg = document.getElementById("preview-img");
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         previewImg.src = this.value;
         
         // Add animation
-        const preview = document.querySelector('.char-preview');
+        const preview = document.querySelector(".char-preview");
         preview.style.transform = 'scale(1.1)';
         setTimeout(() => {
             preview.style.transform = 'scale(1)';
@@ -39,22 +40,22 @@ startButton.addEventListener('click', function () {
     localStorage.setItem('username', username);
     localStorage.setItem('character', character);
 
-    showHoneScreen(username, character);
+    showHomeScreen(username, character);
 });
 
 function showHomeScreen(username, character) {
     // Hide the Welcome Screen
-    const welcomeScreen = document.querySelector('.welcome-screen');
+    const welcomeScreen = document.querySelector(".welcome-screen");
     welcomeScreen.style.display = 'none';
 
     // Show the Home Screen
-    const homeScreen = document.querySelector('.home-screen');
+    const homeScreen = document.querySelector(".home-screen");
     homeScreen.style.display = 'block';
 
-    const usernamePlaceholder = document.getElementById('username-placeholder');
+    const usernamePlaceholder = document.getElementById("username-placeholder");
     usernamePlaceholder.textContent = username;
 
-    const characterImage = document.getElementById('character-image');
+    const characterImage = document.getElementById("character-image");
     characterImage.src = character;
 }
 
@@ -65,26 +66,31 @@ window.addEventListener('load', function() {
     if (savedUsername && savedCharacter) {
         showHomeScreen(savedUsername, savedCharacter);
     }
+    getData();
+    renderCategories();
+    calculateTotal();
 });
 function toggleScreen() {
     wrapper.classList.toggle("show-category");
 };
 
-menuBtn.addEventListener("click", toggleScreen);
 backBtn.addEventListener("click", toggleScreen);
 
 const addTaskBtn = document.querySelector(".add-task-btn");
 const addTaskForm = document.querySelector(".add-task");
-const blackBackdrop = document.querySelector(".black-backdrop");
 
 function toggleAddTaskForm() {
     addTaskForm.classList.toggle("active");
-    blackBackdrop.classList.toggle("active");
     addTaskBtn.classList.toggle("active");
 }
 
-addTaskBtn.addEventListener("click", toggleAddTaskForm);
-blackBackdrop.addEventListener("click", toggleAddTaskForm);
+// Add event listeners with proper checks
+if (addTaskBtn && addTaskForm) {
+    addTaskBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event from bubbling
+        toggleAddTaskForm();
+    });
+}
 
 //add categories and tasks
 let categories =  [
@@ -148,7 +154,7 @@ let tasks = [
         id: 6,
         task: "Read Book",
         category: "Relax",
-        complete: false,
+        completed: false,
     },
 ];
 
@@ -334,6 +340,77 @@ categories.forEach((category) => {
     option.textContent = category.title;
     categorySelect.appendChild(option);
 });
+
+// Profile Modal Elements
+const profileModal = document.querySelector(".profile-modal");
+const menuBtn = document.querySelector(".menu-btn"); // Or add a dedicated button
+const menuDropdown = document.querySelector(".menu-dropdown");
+const saveBtn = document.querySelector('.save-btn');
+const cancelProfileBtn = document.querySelector('.cancel-menu-btn');
+
+// Open Profile Modal
+if (menuBtn && menuDropdown) {
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event from bubbling up
+        menuDropdown.classList.toggle('active');
+        profileModal.classList.remove("active");
+    });
+}
+
+// Close dropdown when clicking elsewhere
+//document.addEventListener('click', () => {
+  //menuDropdown.classList.remove('active');
+//});
+document.addEventListener('click', (e) => {
+    if (e.target !== menuBtn && !menuBtn.contains(e.target)) {
+        menuDropdown.classList.remove('active');
+    }
+});
+
+const openProfileBtn = document.getElementById('open-profile-btn');
+if (openProfileBtn) {
+  openProfileBtn.addEventListener('click', () => {
+    if (profileModal) {
+      profileModal.classList.add('active');
+      menuDropdown.classList.remove('active');
+      document.getElementById('new-username').value = localStorage.getItem('username') || '';
+    }
+  });
+}
+
+// Close Profile Modal
+cancelProfileBtn.addEventListener('click', () => profileModal.classList.remove('active'));
+profileModal.addEventListener('click', (e) => {
+  if (e.target === profileModal) profileModal.classList.remove('active');
+});
+
+saveBtn.addEventListener('click', () => {
+    const newUsername = document.getElementById('new-username').value.trim();
+    const selectedAvatar = document.querySelector('.character-option.selected')?.dataset.avatar || localStorage.getItem('character');
+  
+    if (newUsername) {
+      localStorage.setItem('username', newUsername);
+      localStorage.setItem('character', selectedAvatar);
+      
+      // Update UI
+      document.getElementById('username-placeholder').textContent = newUsername;
+      if (selectedAvatar) {
+        document.getElementById('character-image').src = `image/${selectedAvatar}`;
+      }
+      
+      profileModal.classList.remove('active');
+    } else {
+      alert("Username cannot be empty!");
+    }
+  });
+  
+  // Avatar Selection Logic
+document.querySelectorAll('.character-option').forEach(avatar => {
+    avatar.addEventListener('click', () => {
+      document.querySelectorAll('.character-option').forEach(a => a.classList.remove('selected'));
+      avatar.classList.add('selected');
+    });
+  });
 getData();
 calculateTotal();
 renderCategories();
