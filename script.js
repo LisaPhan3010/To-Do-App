@@ -4,7 +4,7 @@
  */
 const usernameInput = document.getElementById("username");
 const characterSelect = document.getElementById("char-select");
-const startButton = document.getElementById('start-btn');
+const startButton = document.getElementById("start-btn");
 const wrapper = document.querySelector(".wrapper");
 const backBtn = document.querySelector(".back-btn");
 const previewImg = document.getElementById("preview-img");
@@ -70,11 +70,12 @@ window.addEventListener('load', function() {
     renderCategories();
     calculateTotal();
 });
+
 function toggleScreen() {
     wrapper.classList.toggle("show-category");
 };
-
 backBtn.addEventListener("click", toggleScreen);
+
 
 const addTaskBtn = document.querySelector(".add-task-btn");
 const addTaskForm = document.querySelector(".add-task");
@@ -172,6 +173,7 @@ function calculateTotal() {
     totalCategoryTasks.innerHTML = `${categoryTasks.length} Task(s)`;
     totalTasks.innerHTML = tasks.length;
 }; 
+
 function renderCategories() {
     categoriesContainer.innerHTML = "";
     categories.forEach((category) => {
@@ -189,6 +191,7 @@ function renderCategories() {
             categoriesImg.src = `image/${category.img}`;
             calculateTotal();
             renderTasks();
+            document.querySelector(".menu-dropdown").classList.remove("active");
         });
         div.innerHTML = `<div class="left">
                                 <img src="image/${category.img}" alt="${category.title}">
@@ -311,10 +314,10 @@ function getData() {
 const categorySelect = document.querySelector("#category-select");
 const cancelBtn = document.querySelector(".cancel-btn");
 const addBtn = document.querySelector(".add-btn");
-
 const taskInput = document.querySelector("#task-input");
 
 cancelBtn.addEventListener("click", toggleAddTaskForm);
+
 addBtn.addEventListener("click", () => {
     const task = taskInput.value;
     const category = categorySelect.value;
@@ -334,6 +337,7 @@ addBtn.addEventListener("click", () => {
         renderTasks();
     }
 });
+
 categories.forEach((category) => {
     const option = document.createElement("option");
     option.value = category.title.toLowerCase();
@@ -343,7 +347,7 @@ categories.forEach((category) => {
 
 // Profile Modal Elements
 const profileModal = document.querySelector(".profile-modal");
-const menuBtn = document.querySelector(".menu-btn"); // Or add a dedicated button
+const menuBtn = document.querySelector(".menu-btn"); 
 const menuDropdown = document.querySelector(".menu-dropdown");
 const saveBtn = document.querySelector('.save-btn');
 const cancelProfileBtn = document.querySelector('.cancel-menu-btn');
@@ -352,15 +356,12 @@ const cancelProfileBtn = document.querySelector('.cancel-menu-btn');
 if (menuBtn && menuDropdown) {
     menuBtn.addEventListener('click', (e) => {
         e.stopPropagation(); // Prevent event from bubbling up
-        menuDropdown.classList.toggle('active');
-        profileModal.classList.remove("active");
+        if (!wrapper.classList.contains("show-category")) {
+            menuDropdown.classList.toggle("active");
+        }
     });
 }
 
-// Close dropdown when clicking elsewhere
-//document.addEventListener('click', () => {
-  //menuDropdown.classList.remove('active');
-//});
 document.addEventListener('click', (e) => {
     if (e.target !== menuBtn && !menuBtn.contains(e.target)) {
         menuDropdown.classList.remove('active');
@@ -380,6 +381,7 @@ if (openProfileBtn) {
 
 // Close Profile Modal
 cancelProfileBtn.addEventListener('click', () => profileModal.classList.remove('active'));
+
 profileModal.addEventListener('click', (e) => {
   if (e.target === profileModal) profileModal.classList.remove('active');
 });
@@ -402,7 +404,7 @@ saveBtn.addEventListener('click', () => {
     } else {
       alert("Username cannot be empty!");
     }
-  });
+});
   
   // Avatar Selection Logic
 document.querySelectorAll('.character-option').forEach(avatar => {
@@ -410,7 +412,8 @@ document.querySelectorAll('.character-option').forEach(avatar => {
       document.querySelectorAll('.character-option').forEach(a => a.classList.remove('selected'));
       avatar.classList.add('selected');
     });
-  });
+});
+
 getData();
 calculateTotal();
 renderCategories();
