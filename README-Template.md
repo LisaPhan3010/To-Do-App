@@ -1,4 +1,4 @@
-# To-Do-App
+# Project Title
 
 This is a sleek and interactive to-do list web application designed with a mobile interface in mind. Users can personalize their experience by changing usernames, selecting a character avatar, and managing tasks under default categories. It's a fun and practical way to stay organized!
 
