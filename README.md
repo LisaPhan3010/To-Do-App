@@ -8,21 +8,21 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 1. Clone the repository
-
+```bash
 git clone https://github.com/LisaPhan3010/To-Do-App
-cd To-Do-App
+cd To-Do-App ```
 
 2. Open the app
+```bash
 Run the project locally using npx
 npx serve .
-This will start a local server (http://localhost:3000), copy and paste it in any browser then you can open the app.
+This will start a local server (http://localhost:3000), copy and paste it in any browser then you can open the app. 
+```
 
 3. Explore the app
 * Customize username
 * Choose a character
 * Add or remove tasks in categories such as "Work", "Relax", etc
-
-
 
 ## Built With
 * HTML, CSS, JavaScript
