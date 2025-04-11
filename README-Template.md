@@ -7,6 +7,7 @@ This is a sleek and interactive to-do list web application designed with a mobil
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Installing
+```bash
 1. Clone the repository
 
 git clone https://github.com/LisaPhan3010/To-Do-App
@@ -21,7 +22,7 @@ This will start a local server (http://localhost:3000), copy and paste it in any
 * Customize username
 * Choose a character
 * Add or remove tasks in categories such as "Work", "Relax", etc
-
+```
 
 
 ## Built With
