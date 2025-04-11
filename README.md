@@ -10,14 +10,14 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repository
 ```bash
 git clone https://github.com/LisaPhan3010/To-Do-App
-cd To-Do-App ```
-
-2. Open the app
-```bash
-Run the project locally using npx
-npx serve .
-This will start a local server (http://localhost:3000), copy and paste it in any browser then you can open the app. 
+cd To-Do-App
 ```
+2. Open the app
+Run the project locally using npx
+```bash
+npx serve .
+```
+This will start a local server (http://localhost:3000), copy and paste it in any browser then you can open the app. 
 
 3. Explore the app
 * Customize username
